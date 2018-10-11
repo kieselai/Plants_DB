@@ -1,0 +1,26 @@
+version: '3.1'
+
+services:
+  postgres:
+    image: postgres
+    secrets:
+      - postgres_passwd_secret
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres_passwd_secret
+      PGDATA: /data/postgres
+    volumes:
+       - ./pgdata:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+  
+networks:
+  postgres:
+    driver: bridge
+
+secrets: 
+  postgres_passwd_secret:
+    file: postgres_passwd_secret
