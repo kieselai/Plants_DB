@@ -4,13 +4,13 @@ services:
   postgres:
     image: postgres
     secrets:
-      - postgres_passwd_secret
+      - postgresql_password_secret
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD_FILE: /run/secrets/postgres_passwd_secret
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgresql_password_secret
       PGDATA: /data/postgres
     volumes:
-       - ./pgdata:/data/postgres
+       - ./data/postgreSqlData:/data/postgres
     ports:
       - "5432:5432"
     networks:
@@ -22,5 +22,5 @@ networks:
     driver: bridge
 
 secrets: 
-  postgres_passwd_secret:
-    file: postgres_passwd_secret
+  postgresql_password_secret:
+    file: ./secrets/postgreSqlPassword.secret

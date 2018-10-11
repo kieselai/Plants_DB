@@ -1,1 +1,4 @@
-postgres_passwd_secret
+data/*
+secrets/*
+*.secret
+
